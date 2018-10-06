@@ -8,7 +8,7 @@ export class SmartPdf {
   serverPort: number;
   headlessBrowser: plugins.puppeteer.Browser;
   private _readyDeferred: plugins.smartpromise.Deferred<void>;
-  private _candidates: {[key: string]: PdfCandidate} = {};
+  private _candidates: { [key: string]: PdfCandidate } = {};
 
   constructor() {
     this._readyDeferred = new plugins.smartpromise.Deferred();
@@ -34,6 +34,15 @@ export class SmartPdf {
     });
   }
 
+  async close () {
+    const done = plugins.smartpromise.defer<void>();
+    this.htmlServerInstance.close(() => {
+      done.resolve();
+    });
+    await this.headlessBrowser.close();
+    await done.promise;
+  } 
+
   /**
    * returns a pdf for a given html string;
    */
@@ -42,15 +51,17 @@ export class SmartPdf {
     const pdfCandidate = new PdfCandidate(htmlStringArg);
     this._candidates[pdfCandidate.pdfId] = pdfCandidate;
     const page = await this.headlessBrowser.newPage();
-    const response = await page.goto(`http://localhost:3210/${pdfCandidate.pdfId}`, { waitUntil: 'networkidle2' });
+    const response = await page.goto(`http://localhost:3210/${pdfCandidate.pdfId}`, {
+      waitUntil: 'networkidle2'
+    });
     const headers = response.headers();
-    if(headers['pdf-id'] !== pdfCandidate.pdfId) {
+    if (headers['pdf-id'] !== pdfCandidate.pdfId) {
       console.log('Error! Headers do not match. For security reasons no pdf is being emitted!');
-      return
+      return;
     } else {
       console.log(`id security check passed for ${pdfCandidate.pdfId}`);
     }
-    
+
     await page.pdf({
       path: plugins.path.join(paths.pdfDir, `${pdfCandidate.pdfId}.pdf`),
       format: 'A4'
