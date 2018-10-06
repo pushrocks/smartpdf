@@ -1,0 +1,30 @@
+{
+  "name": "smartpdf",
+  "version": "1.0.1",
+  "description": "create pdfs on the fly",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "author": "Lossless GmbH",
+  "license": "MIT",
+  "scripts": {
+    "test": "tstest test/",
+    "format": "(gitzone format)"
+  },
+  "devDependencies": {
+    "@gitzone/tsbuild": "^2.0.22",
+    "@gitzone/tsrun": "^1.1.12",
+    "@gitzone/tstest": "^1.0.15",
+    "@pushrocks/tapbundle": "^3.0.7",
+    "@types/node": "^10.11.4"
+  },
+  "dependencies": {
+    "@pushrocks/smartfile": "^6.0.8",
+    "@pushrocks/smartnetwork": "^1.1.0",
+    "@pushrocks/smartpromise": "^2.0.5",
+    "@types/express": "^4.16.0",
+    "@types/puppeteer": "^1.8.0",
+    "express": "^4.16.3",
+    "puppeteer": "^1.8.0",
+    "smartunique": "^2.0.0"
+  }
+}

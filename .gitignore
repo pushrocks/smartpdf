@@ -1,0 +1,7 @@
+.nogit/
+node_modules/
+assets/pdfdir/
+coverage/
+public/
+pages/
+.yarn/
