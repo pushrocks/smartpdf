@@ -78,7 +78,10 @@ export class SmartPdf {
     const pdfId = plugins.smartunique.shortId();
     await page.pdf({
       path: plugins.path.join(paths.pdfDir, `${pdfId}.pdf`),
-      format: 'A4'
+      format: 'A4',
+      printBackground: true,
+      displayHeaderFooter: false,
+      preferCSSPageSize: true
     });
     await page.close();
   }

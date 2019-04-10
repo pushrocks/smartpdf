@@ -13,7 +13,7 @@ tap.test('should create a pdf from html string', async () => {
 });
 
 tap.test('should create a pdf from website', async () => {
-  await testSmartPdf.getPdfForWebsite('https://wikipedia.org');
+  await testSmartPdf.getPdfForWebsite('https://maintainedby.lossless.com');
 });
 
 tap.test('should be able to close properly', async () => {
