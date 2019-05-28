@@ -37,18 +37,6 @@ snyk:
 # ====================
 # test stage
 # ====================
-testLEGACY:
-  stage: test
-  script:
-  - npmci npm prepare
-  - npmci node install legacy
-  - npmci npm install
-  - npmci npm test
-  coverage: /\d+.?\d+?\%\s*coverage/
-  tags:
-  - docker
-  - notpriv
-  allow_failure: true
 
 testLTS:
   stage: test
@@ -121,10 +109,10 @@ pages:
   image: hosttoday/ht-docker-node:npmci
   stage: metadata
   script:
-    - npmci command npm install -g typedoc typescript
+    - npmci command npm install -g @gitzone/tsdoc
     - npmci npm prepare
     - npmci npm install
-    - npmci command typedoc --module "commonjs" --target "ES2016" --out public/ ts/
+    - npmci command tsdoc
   tags:
     - docker
     - notpriv
@@ -134,14 +122,4 @@ pages:
     expire_in: 1 week
     paths:
     - public
-  allow_failure: true
-
-windowsCompatibility:
-  image: stefanscherer/node-windows:10-build-tools
-  stage: metadata
-  script:
-  - npm install & npm test
-  coverage: /\d+.?\d+?\%\s*coverage/
-  tags:
-  - windows
   allow_failure: true

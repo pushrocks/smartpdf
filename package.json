@@ -28,5 +28,15 @@
     "@types/puppeteer": "^1.12.3",
     "express": "^4.16.4",
     "puppeteer": "^1.14.0"
-  }
+  },
+  "files": [
+    "ts/*",
+    "ts_web/*",
+    "dist/*",
+    "dist_web/*",
+    "assets/*",
+    "cli.js",
+    "npmextra.json",
+    "readme.md"
+  ]
 }

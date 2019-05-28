@@ -2,5 +2,15 @@
   "npmci": {
     "npmGlobalTools": [],
     "npmAccessLevel": "public"
+  },
+  "gitzone": {
+    "module": {
+      "githost": "gitlab.om",
+      "gitscope": "pushrocks",
+      "gitrepo": "smartpdf",
+      "shortDescription": "Create PDFs fast and smoothly",
+      "npmPackagename": "@pushrocks/smartpdf",
+      "license": "MIT"
+    }
   }
 }

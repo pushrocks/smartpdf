@@ -34,14 +34,14 @@ export class SmartPdf {
     });
   }
 
-  async close () {
+  async close() {
     const done = plugins.smartpromise.defer<void>();
     this.htmlServerInstance.close(() => {
       done.resolve();
     });
     await this.headlessBrowser.close();
     await done.promise;
-  } 
+  }
 
   /**
    * returns a pdf for a given html string;

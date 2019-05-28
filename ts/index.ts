@@ -1,8 +1,8 @@
 // compatibility
 declare global {
-  interface Element { }
-  interface Node { }
-  interface NodeListOf<TNode = Node> { }
+  interface Element {}
+  interface Node {}
+  interface NodeListOf<TNode = Node> {}
 }
 
 // normal
