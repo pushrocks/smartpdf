@@ -13,7 +13,7 @@ import * as smartunique from '@pushrocks/smartunique';
 export { smartfile, smartpromise, smartunique, smartnetwork };
 
 // thirdparty
-import * as express from 'express';
-import * as puppeteer from 'puppeteer';
+import express from 'express';
+import puppeteer from 'puppeteer';
 
 export { express, puppeteer };

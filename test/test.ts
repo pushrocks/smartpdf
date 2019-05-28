@@ -12,8 +12,12 @@ tap.test('should create a pdf from html string', async () => {
   await testSmartPdf.getPdfForHtmlString('hi');
 });
 
-tap.test('should create a pdf from website', async () => {
+tap.test('should create a pdf from website as A4', async () => {
   await testSmartPdf.getPdfForWebsite('https://maintainedby.lossless.com');
+});
+
+tap.test('should create a pdf from website as single page PDF', async () => {
+  await testSmartPdf.getFullWebsiteAsSinglePdf('https://maintainedby.lossless.com');
 });
 
 tap.test('should be able to close properly', async () => {

@@ -3,6 +3,8 @@ import * as paths from './smartpdf.paths';
 import { Server } from 'http';
 import { PdfCandidate } from './smartpdf.classes.pdfcandidate';
 
+declare const document;
+
 export class SmartPdf {
   htmlServerInstance: Server;
   serverPort: number;
@@ -79,6 +81,28 @@ export class SmartPdf {
     await page.pdf({
       path: plugins.path.join(paths.pdfDir, `${pdfId}.pdf`),
       format: 'A4',
+      printBackground: true,
+      displayHeaderFooter: false,
+      preferCSSPageSize: true
+    });
+    await page.close();
+  }
+
+  async getFullWebsiteAsSinglePdf(websiteUrl: string) {
+    const page = await this.headlessBrowser.newPage();
+    const response = await page.goto(websiteUrl, { waitUntil: 'networkidle2' });
+    const pdfId = plugins.smartunique.shortId();
+    const {documentHeight, documentWidth} = await page.evaluate(() => {
+      
+      return {
+        documentHeight: document.height,
+        documentWidth: document.width
+      };
+    });
+    await page.pdf({
+      path: plugins.path.join(paths.pdfDir, `${pdfId}.pdf`),
+      height: documentWidth,
+      width: documentWidth,
       printBackground: true,
       displayHeaderFooter: false,
       preferCSSPageSize: true
