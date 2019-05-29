@@ -5,6 +5,12 @@ import { PdfCandidate } from './smartpdf.classes.pdfcandidate';
 
 declare const document;
 
+export interface IPdfResult {
+  name: string,
+  id: string,
+  buffer: Buffer;
+}
+
 export class SmartPdf {
   htmlServerInstance: Server;
   serverPort: number;
@@ -47,7 +53,7 @@ export class SmartPdf {
   /**
    * returns a pdf for a given html string;
    */
-  async getPdfForHtmlString(htmlStringArg: string) {
+  async getPdfForHtmlString(htmlStringArg: string): Promise<IPdfResult> {
     await this._readyDeferred.promise;
     const pdfCandidate = new PdfCandidate(htmlStringArg);
     this._candidates[pdfCandidate.pdfId] = pdfCandidate;
@@ -63,29 +69,37 @@ export class SmartPdf {
       console.log(`id security check passed for ${pdfCandidate.pdfId}`);
     }
 
-    await page.pdf({
-      path: plugins.path.join(paths.pdfDir, `${pdfCandidate.pdfId}.pdf`),
+    const pdfBuffer = await page.pdf({
       format: 'A4'
     });
     await page.close();
     delete this._candidates[pdfCandidate.pdfId];
     pdfCandidate.doneDeferred.resolve();
     await pdfCandidate.doneDeferred.promise;
+    return {
+      id: pdfCandidate.pdfId,
+      name: `${pdfCandidate.pdfId}.js`,
+      buffer: pdfBuffer
+    }
   }
 
-  async getPdfForWebsite(websiteUrl: string) {
+  async getPdfForWebsite(websiteUrl: string): Promise<IPdfResult> {
     const page = await this.headlessBrowser.newPage();
     page.emulateMedia('screen');
     const response = await page.goto(websiteUrl, { waitUntil: 'networkidle2' });
     const pdfId = plugins.smartunique.shortId();
-    await page.pdf({
-      path: plugins.path.join(paths.pdfDir, `${pdfId}.pdf`),
+    const pdfBuffer = await page.pdf({
       format: 'A4',
       printBackground: true,
       displayHeaderFooter: false,
       preferCSSPageSize: true
     });
     await page.close();
+    return {
+      id: pdfId,
+      name: `${pdfId}.js`,
+      buffer: pdfBuffer
+    }
   }
 
   async getFullWebsiteAsSinglePdf(websiteUrl: string) {
@@ -100,8 +114,7 @@ export class SmartPdf {
         documentWidth: document.width
       };
     });
-    await page.pdf({
-      path: plugins.path.join(paths.pdfDir, `${pdfId}.pdf`),
+    const pdfBuffer = await page.pdf({
       height: documentWidth,
       width: documentWidth,
       printBackground: true,
@@ -109,5 +122,10 @@ export class SmartPdf {
       preferCSSPageSize: true
     });
     await page.close();
+    return {
+      id: pdfId,
+      name: `${pdfId}.js`,
+      buffer: pdfBuffer
+    }
   }
 }
