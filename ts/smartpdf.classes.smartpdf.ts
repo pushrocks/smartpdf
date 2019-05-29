@@ -14,10 +14,9 @@ export class SmartPdf {
 
   constructor() {
     this._readyDeferred = new plugins.smartpromise.Deferred();
-    this.init();
   }
 
-  async init() {
+  async start() {
     // setup puppeteer
     this.headlessBrowser = await plugins.puppeteer.launch();
 
@@ -36,7 +35,7 @@ export class SmartPdf {
     });
   }
 
-  async close() {
+  async stop() {
     const done = plugins.smartpromise.defer<void>();
     this.htmlServerInstance.close(() => {
       done.resolve();
