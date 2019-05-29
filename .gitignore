@@ -20,3 +20,4 @@ dist_serve/
 dist_ts_web/
 
 # custom
+assets/pdfdir
