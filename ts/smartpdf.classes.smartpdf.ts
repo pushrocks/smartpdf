@@ -11,7 +11,7 @@ export class SmartPdf {
   htmlServerInstance: Server;
   serverPort: number;
   headlessBrowser: plugins.puppeteer.Browser;
-  externalBrowser: boolean = false;
+  externalBrowserBool: boolean = false;
   private _readyDeferred: plugins.smartpromise.Deferred<void>;
   private _candidates: { [key: string]: PdfCandidate } = {};
 
@@ -23,7 +23,9 @@ export class SmartPdf {
     // lets set the external browser in case one is provided
     this.headlessBrowser = headlessBrowserArg
     // setup puppeteer
-    if (!this.headlessBrowser) {
+    if (this.headlessBrowser) {
+      this.externalBrowserBool = true;
+    } else {
       let  chromeArgs: string[] = [];
       if(process.env.CI) {
         chromeArgs = chromeArgs.concat(['--no-sandbox', '--disable-setuid-sandbox'])
@@ -31,8 +33,6 @@ export class SmartPdf {
       this.headlessBrowser = await plugins.puppeteer.launch({
         args: chromeArgs
       });
-    } else {
-      this.externalBrowser = true;
     }
 
     // setup server
@@ -57,7 +57,7 @@ export class SmartPdf {
       done.resolve();
     });
     
-    if (!this.externalBrowser) {
+    if (!this.externalBrowserBool) {
       await this.headlessBrowser.close();
     }
 
