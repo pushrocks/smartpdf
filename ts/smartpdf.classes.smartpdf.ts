@@ -15,12 +15,13 @@ export class SmartPdf {
   private _readyDeferred: plugins.smartpromise.Deferred<void>;
   private _candidates: { [key: string]: PdfCandidate } = {};
 
-  constructor(headlessBrowserArg?) {
-    this.headlessBrowser = headlessBrowserArg
+  constructor() {
     this._readyDeferred = new plugins.smartpromise.Deferred();
   }
 
-  async start() {
+  async start(headlessBrowserArg?) {
+    // lets set the external browser in case one is provided
+    this.headlessBrowser = headlessBrowserArg
     // setup puppeteer
     if (!this.headlessBrowser) {
       let  chromeArgs: string[] = [];
