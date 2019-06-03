@@ -5,7 +5,7 @@ import { PdfCandidate } from './smartpdf.classes.pdfcandidate';
 
 declare const document;
 
-import { IPdfResult } from './interfaces';
+import * as interfaces from './interfaces';
 
 export class SmartPdf {
   htmlServerInstance: Server;
@@ -50,6 +50,7 @@ export class SmartPdf {
     });
   }
 
+  // stop
   async stop() {
     const done = plugins.smartpromise.defer<void>();
     this.htmlServerInstance.close(() => {
@@ -66,7 +67,7 @@ export class SmartPdf {
   /**
    * returns a pdf for a given html string;
    */
-  async getPdfForHtmlString(htmlStringArg: string): Promise<IPdfResult> {
+  async getPdfForHtmlString(htmlStringArg: string): Promise<interfaces.IPdfResult> {
     await this._readyDeferred.promise;
     const pdfCandidate = new PdfCandidate(htmlStringArg);
     this._candidates[pdfCandidate.pdfId] = pdfCandidate;
@@ -96,7 +97,7 @@ export class SmartPdf {
     };
   }
 
-  async getPdfForWebsite(websiteUrl: string): Promise<IPdfResult> {
+  async getPdfForWebsite(websiteUrl: string): Promise<interfaces.IPdfResult> {
     const page = await this.headlessBrowser.newPage();
     page.emulateMedia('screen');
     const response = await page.goto(websiteUrl, { waitUntil: 'networkidle2' });
