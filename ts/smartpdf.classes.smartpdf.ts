@@ -23,7 +23,13 @@ export class SmartPdf {
   async start() {
     // setup puppeteer
     if (!this.headlessBrowser) {
-      this.headlessBrowser = await plugins.puppeteer.launch();
+      let  chromeArgs: string[] = [];
+      if(process.env.CI) {
+        chromeArgs = chromeArgs.concat(['--no-sandbox', '--disable-setuid-sandbox'])
+      }
+      this.headlessBrowser = await plugins.puppeteer.launch({
+        args: chromeArgs
+      });
     } else {
       this.externalBrowser = true;
     }
