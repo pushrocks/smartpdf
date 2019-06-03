@@ -48,7 +48,11 @@ export class SmartPdf {
     this.htmlServerInstance.close(() => {
       done.resolve();
     });
-    await this.headlessBrowser.close();
+    
+    if (!this.externalBrowser) {
+      await this.headlessBrowser.close();
+    }
+
     await done.promise;
   }
 
