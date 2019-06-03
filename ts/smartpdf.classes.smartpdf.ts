@@ -10,7 +10,7 @@ import * as interfaces from './interfaces';
 export class SmartPdf {
   htmlServerInstance: Server;
   serverPort: number;
-  headlessBrowser: plugins.puppeteer.Browser;
+  headlessBrowser: plugins.smartpuppeteer.puppeteer.Browser;
   externalBrowserBool: boolean = false;
   private _readyDeferred: plugins.smartpromise.Deferred<void>;
   private _candidates: { [key: string]: PdfCandidate } = {};
@@ -26,13 +26,7 @@ export class SmartPdf {
     if (this.headlessBrowser) {
       this.externalBrowserBool = true;
     } else {
-      let  chromeArgs: string[] = [];
-      if(process.env.CI) {
-        chromeArgs = chromeArgs.concat(['--no-sandbox', '--disable-setuid-sandbox'])
-      }
-      this.headlessBrowser = await plugins.puppeteer.launch({
-        args: chromeArgs
-      });
+      this.headlessBrowser = await plugins.smartpuppeteer.getEnvAwareBrowserInstance();
     }
 
     // setup server
