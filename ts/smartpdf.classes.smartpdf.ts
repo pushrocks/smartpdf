@@ -5,11 +5,7 @@ import { PdfCandidate } from './smartpdf.classes.pdfcandidate';
 
 declare const document;
 
-export interface IPdfResult {
-  name: string,
-  id: string,
-  buffer: Buffer;
-}
+import { IPdfResult } from './interfaces';
 
 export class SmartPdf {
   htmlServerInstance: Server;
@@ -80,7 +76,7 @@ export class SmartPdf {
       id: pdfCandidate.pdfId,
       name: `${pdfCandidate.pdfId}.js`,
       buffer: pdfBuffer
-    }
+    };
   }
 
   async getPdfForWebsite(websiteUrl: string): Promise<IPdfResult> {
@@ -99,7 +95,7 @@ export class SmartPdf {
       id: pdfId,
       name: `${pdfId}.js`,
       buffer: pdfBuffer
-    }
+    };
   }
 
   async getFullWebsiteAsSinglePdf(websiteUrl: string) {
@@ -107,8 +103,7 @@ export class SmartPdf {
     page.emulateMedia('screen');
     const response = await page.goto(websiteUrl, { waitUntil: 'networkidle2' });
     const pdfId = plugins.smartunique.shortId();
-    const {documentHeight, documentWidth} = await page.evaluate(() => {
-      
+    const { documentHeight, documentWidth } = await page.evaluate(() => {
       return {
         documentHeight: document.height,
         documentWidth: document.width
@@ -126,6 +121,6 @@ export class SmartPdf {
       id: pdfId,
       name: `${pdfId}.js`,
       buffer: pdfBuffer
-    }
+    };
   }
 }
