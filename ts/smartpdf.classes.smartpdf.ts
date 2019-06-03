@@ -11,16 +11,22 @@ export class SmartPdf {
   htmlServerInstance: Server;
   serverPort: number;
   headlessBrowser: plugins.puppeteer.Browser;
+  externalBrowser: boolean = false;
   private _readyDeferred: plugins.smartpromise.Deferred<void>;
   private _candidates: { [key: string]: PdfCandidate } = {};
 
-  constructor() {
+  constructor(headlessBrowserArg?) {
+    this.headlessBrowser = headlessBrowserArg
     this._readyDeferred = new plugins.smartpromise.Deferred();
   }
 
   async start() {
     // setup puppeteer
-    this.headlessBrowser = await plugins.puppeteer.launch();
+    if (!this.headlessBrowser) {
+      this.headlessBrowser = await plugins.puppeteer.launch();
+    } else {
+      this.externalBrowser = true;
+    }
 
     // setup server
     const app = plugins.express();
