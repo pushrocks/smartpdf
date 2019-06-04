@@ -21,7 +21,7 @@ export class SmartPdf {
 
   async start(headlessBrowserArg?) {
     // lets set the external browser in case one is provided
-    this.headlessBrowser = headlessBrowserArg
+    this.headlessBrowser = headlessBrowserArg;
     // setup puppeteer
     if (this.headlessBrowser) {
       this.externalBrowserBool = true;
@@ -50,7 +50,7 @@ export class SmartPdf {
     this.htmlServerInstance.close(() => {
       done.resolve();
     });
-    
+
     if (!this.externalBrowserBool) {
       await this.headlessBrowser.close();
     }

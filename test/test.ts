@@ -25,7 +25,9 @@ tap.test('should create a pdf from website as single page PDF', async () => {
 });
 
 tap.test('should create a valid PDFResult', async () => {
-  const pdfResult = await testSmartPdf.getFullWebsiteAsSinglePdf('https://maintainedby.lossless.com');
+  const pdfResult = await testSmartPdf.getFullWebsiteAsSinglePdf(
+    'https://maintainedby.lossless.com'
+  );
   expect(pdfResult.buffer).to.be.instanceOf(Buffer);
 });
 
