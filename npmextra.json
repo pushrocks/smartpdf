@@ -5,7 +5,7 @@
   },
   "gitzone": {
     "module": {
-      "githost": "gitlab.om",
+      "githost": "gitlab.com",
       "gitscope": "pushrocks",
       "gitrepo": "smartpdf",
       "shortDescription": "Create PDFs fast and smoothly",

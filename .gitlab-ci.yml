@@ -1,5 +1,5 @@
 # gitzone ci_default
-image: hosttoday/ht-docker-node:npmci
+image: registry.gitlab.com/hosttoday/ht-docker-node:npmci
 
 cache:
   paths:
@@ -49,14 +49,14 @@ testLTS:
   tags:
   - docker
   - notpriv
-    
-testSTABLE:
+
+testBuild:
   stage: test
   script:
   - npmci npm prepare
-  - npmci node install stable
+  - npmci node install lts
   - npmci npm install
-  - npmci npm test
+  - npmci command npm run build
   coverage: /\d+.?\d+?\%\s*coverage/
   tags:
   - docker
@@ -65,7 +65,7 @@ testSTABLE:
 release:
   stage: release
   script:
-  - npmci node install stable
+  - npmci node install lts
   - npmci npm publish
   only:
   - tags
@@ -80,8 +80,9 @@ codequality:
   stage: metadata
   allow_failure: true
   script:
-    - npm install -g tslint typescript
-    - tslint -c tslint.json ./ts/**/*.ts
+    - npmci command npm install -g tslint typescript
+    - npmci npm install
+    - npmci command "tslint -c tslint.json ./ts/**/*.ts"
   tags:
   - docker
   - priv
@@ -97,7 +98,9 @@ trigger:
   - notpriv
 
 pages:
-  image: hosttoday/ht-docker-node:npmci
+  image: hosttoday/ht-docker-dbase:npmci
+  services:
+   - docker:18-dind
   stage: metadata
   script:
     - npmci command npm install -g @gitzone/tsdoc

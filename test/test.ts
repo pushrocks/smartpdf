@@ -29,6 +29,12 @@ tap.test('should create a valid PDFResult', async () => {
     'https://maintainedby.lossless.com'
   );
   expect(pdfResult.buffer).to.be.instanceOf(Buffer);
+  const fs = await import('fs');
+
+  if (!fs.existsSync('.nogit/')) {
+    fs.mkdirSync('.nogit/');
+  }
+  fs.writeFileSync('.nogit/sample.pdf', pdfResult.buffer);
 });
 
 tap.test('should be able to close properly', async () => {
