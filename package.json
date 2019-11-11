@@ -13,19 +13,19 @@
     "build": "(tsbuild)"
   },
   "devDependencies": {
-    "@gitzone/tsbuild": "^2.1.11",
+    "@gitzone/tsbuild": "^2.1.17",
     "@gitzone/tsrun": "^1.2.8",
-    "@gitzone/tstest": "^1.0.24",
-    "@pushrocks/tapbundle": "^3.0.11",
-    "@types/node": "^12.7.1"
+    "@gitzone/tstest": "^1.0.28",
+    "@pushrocks/tapbundle": "^3.0.13",
+    "@types/node": "^12.12.7"
   },
   "dependencies": {
-    "@pushrocks/smartfile": "^7.0.4",
-    "@pushrocks/smartnetwork": "^1.1.6",
-    "@pushrocks/smartpromise": "^3.0.2",
+    "@pushrocks/smartfile": "^7.0.6",
+    "@pushrocks/smartnetwork": "^1.1.14",
+    "@pushrocks/smartpromise": "^3.0.6",
     "@pushrocks/smartpuppeteer": "^1.0.5",
     "@pushrocks/smartunique": "^3.0.1",
-    "@types/express": "^4.17.0",
+    "@types/express": "^4.17.2",
     "express": "^4.17.1"
   },
   "files": [
