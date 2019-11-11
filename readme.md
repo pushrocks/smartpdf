@@ -18,6 +18,11 @@ Create PDFs fast and smoothly
 
 ## Usage
 
+
+## Contribution
+
+We are always happy for code contributions. If you are not the code contributing type that is ok. Still, maintaining Open Source repositories takes considerable time and thought. If you like the quality of what we do and our modules are useful to you we would appreciate a little monthly contribution: You can [contribute one time](https://lossless.link/contribute-onetime) or [contribute monthly](https://lossless.link/contribute). :)
+
 For further information read the linked docs at the top of this readme.
 
 > MIT licensed | **&copy;** [Lossless GmbH](https://lossless.gmbh)
