@@ -78,7 +78,10 @@ export class SmartPdf {
     }
 
     const pdfBuffer = await page.pdf({
-      format: 'A4'
+      format: 'A4',
+      printBackground: true,
+      displayHeaderFooter: false,
+      preferCSSPageSize: true
     });
     await page.close();
     delete this._candidates[pdfCandidate.pdfId];
