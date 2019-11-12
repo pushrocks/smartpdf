@@ -99,8 +99,16 @@ export class SmartPdf {
     page.emulateMedia('screen');
     const response = await page.goto(websiteUrl, { waitUntil: 'networkidle2' });
     const pdfId = plugins.smartunique.shortId();
+    const { documentHeight, documentWidth } = await page.evaluate(() => {
+      return {
+        documentHeight: document.height,
+        documentWidth: document.width
+      };
+    });
     const pdfBuffer = await page.pdf({
       format: 'A4',
+      height: documentWidth,
+      width: documentWidth,
       printBackground: true,
       displayHeaderFooter: false,
       preferCSSPageSize: true
@@ -125,6 +133,7 @@ export class SmartPdf {
       };
     });
     const pdfBuffer = await page.pdf({
+      format: 'A4',
       height: documentWidth,
       width: documentWidth,
       printBackground: true,
