@@ -17,11 +17,11 @@ tap.test('should create a pdf from html string', async () => {
 });
 
 tap.test('should create a pdf from website as A4', async () => {
-  await testSmartPdf.getPdfForWebsite('https://maintainedby.lossless.com');
+  await testSmartPdf.getPdfForWebsite('https://www.wikipedia.org');
 });
 
 tap.test('should create a pdf from website as single page PDF', async () => {
-  await testSmartPdf.getFullWebsiteAsSinglePdf('https://maintainedby.lossless.com');
+  await testSmartPdf.getFullWebsiteAsSinglePdf('https://www.wikipedia.org');
 });
 
 tap.test('should create a valid PDFResult', async () => {

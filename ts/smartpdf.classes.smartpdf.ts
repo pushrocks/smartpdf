@@ -98,7 +98,7 @@ export class SmartPdf {
 
   async getPdfForWebsite(websiteUrl: string): Promise<interfaces.IPdfResult> {
     const page = await this.headlessBrowser.newPage();
-    page.emulateMedia('screen');
+    await page.emulateMedia('screen');
     const response = await page.goto(websiteUrl, { waitUntil: 'networkidle2' });
     const pdfId = plugins.smartunique.shortId();
     const { documentHeight, documentWidth } = await page.evaluate(() => {
