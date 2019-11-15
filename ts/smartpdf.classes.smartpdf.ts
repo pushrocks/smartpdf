@@ -26,7 +26,9 @@ export class SmartPdf {
     if (this.headlessBrowser) {
       this.externalBrowserBool = true;
     } else {
-      this.headlessBrowser = await plugins.smartpuppeteer.getEnvAwareBrowserInstance();
+      this.headlessBrowser = await plugins.smartpuppeteer.getEnvAwareBrowserInstance({
+        forceNoSandbox: true
+      });
     }
 
     // setup server

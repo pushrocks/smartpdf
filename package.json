@@ -25,7 +25,7 @@
     "@pushrocks/smartfile": "^7.0.6",
     "@pushrocks/smartnetwork": "^1.1.14",
     "@pushrocks/smartpromise": "^3.0.6",
-    "@pushrocks/smartpuppeteer": "^1.0.5",
+    "@pushrocks/smartpuppeteer": "^1.0.6",
     "@pushrocks/smartunique": "^3.0.1",
     "@types/express": "^4.17.2",
     "express": "^4.17.1"
