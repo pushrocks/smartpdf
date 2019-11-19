@@ -13,11 +13,11 @@ tap.test('should start the instance', async () => {
 });
 
 tap.test('should create a pdf from html string', async () => {
-  await testSmartPdf.getPdfForHtmlString('hi');
+  await testSmartPdf.getPdfResultForHtmlString('hi');
 });
 
 tap.test('should create a pdf from website as A4', async () => {
-  await testSmartPdf.getPdfForWebsite('https://www.wikipedia.org');
+  await testSmartPdf.getPdfResultForWebsite('https://www.wikipedia.org');
 });
 
 tap.test('should create a pdf from website as single page PDF', async () => {

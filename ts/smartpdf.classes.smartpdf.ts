@@ -63,7 +63,7 @@ export class SmartPdf {
   /**
    * returns a pdf for a given html string;
    */
-  async getPdfForHtmlString(htmlStringArg: string): Promise<interfaces.IPdfResult> {
+  async getPdfResultForHtmlString(htmlStringArg: string): Promise<interfaces.IPdfResult> {
     await this._readyDeferred.promise;
     const pdfCandidate = new PdfCandidate(htmlStringArg);
     this._candidates[pdfCandidate.pdfId] = pdfCandidate;
@@ -96,7 +96,7 @@ export class SmartPdf {
     };
   }
 
-  async getPdfForWebsite(websiteUrl: string): Promise<interfaces.IPdfResult> {
+  async getPdfResultForWebsite(websiteUrl: string): Promise<interfaces.IPdfResult> {
     const page = await this.headlessBrowser.newPage();
     await page.emulateMedia('screen');
     const response = await page.goto(websiteUrl, { waitUntil: 'networkidle2' });
