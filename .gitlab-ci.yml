@@ -29,7 +29,7 @@ snyk:
   stage: security
   script:
     - npmci npm prepare
-    - npmci command npm install --ignore-scripts
+    - npmci command npm ci --ignore-scripts
     - npmci command snyk test
   tags:
     - lossless
