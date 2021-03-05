@@ -27,7 +27,7 @@ export class SmartPdf {
       this.externalBrowserBool = true;
     } else {
       this.headlessBrowser = await plugins.smartpuppeteer.getEnvAwareBrowserInstance({
-        forceNoSandbox: true
+        forceNoSandbox: true,
       });
     }
 
@@ -69,7 +69,7 @@ export class SmartPdf {
     this._candidates[pdfCandidate.pdfId] = pdfCandidate;
     const page = await this.headlessBrowser.newPage();
     const response = await page.goto(`http://localhost:3210/${pdfCandidate.pdfId}`, {
-      waitUntil: 'networkidle2'
+      waitUntil: 'networkidle2',
     });
     const headers = response.headers();
     if (headers['pdf-id'] !== pdfCandidate.pdfId) {
@@ -83,7 +83,7 @@ export class SmartPdf {
       format: 'A4',
       printBackground: true,
       displayHeaderFooter: false,
-      preferCSSPageSize: true
+      preferCSSPageSize: true,
     });
     await page.close();
     delete this._candidates[pdfCandidate.pdfId];
@@ -92,7 +92,7 @@ export class SmartPdf {
     return {
       id: pdfCandidate.pdfId,
       name: `${pdfCandidate.pdfId}.js`,
-      buffer: pdfBuffer
+      buffer: pdfBuffer,
     };
   }
 
@@ -104,7 +104,7 @@ export class SmartPdf {
     const { documentHeight, documentWidth } = await page.evaluate(() => {
       return {
         documentHeight: document.height,
-        documentWidth: document.width
+        documentWidth: document.width,
       };
     });
     const pdfBuffer = await page.pdf({
@@ -113,13 +113,13 @@ export class SmartPdf {
       width: documentWidth,
       printBackground: true,
       displayHeaderFooter: false,
-      preferCSSPageSize: true
+      preferCSSPageSize: true,
     });
     await page.close();
     return {
       id: pdfId,
       name: `${pdfId}.js`,
-      buffer: pdfBuffer
+      buffer: pdfBuffer,
     };
   }
 
@@ -131,7 +131,7 @@ export class SmartPdf {
     const { documentHeight, documentWidth } = await page.evaluate(() => {
       return {
         documentHeight: document.height,
-        documentWidth: document.width
+        documentWidth: document.width,
       };
     });
     const pdfBuffer = await page.pdf({
@@ -140,13 +140,13 @@ export class SmartPdf {
       width: documentWidth,
       printBackground: true,
       displayHeaderFooter: false,
-      preferCSSPageSize: true
+      preferCSSPageSize: true,
     });
     await page.close();
     return {
       id: pdfId,
       name: `${pdfId}.js`,
-      buffer: pdfBuffer
+      buffer: pdfBuffer,
     };
   }
 }
