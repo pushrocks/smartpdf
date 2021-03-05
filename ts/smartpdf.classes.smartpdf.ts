@@ -98,7 +98,7 @@ export class SmartPdf {
 
   async getPdfResultForWebsite(websiteUrl: string): Promise<interfaces.IPdfResult> {
     const page = await this.headlessBrowser.newPage();
-    await page.emulateMedia('screen');
+    await page.emulateMediaType('screen');
     const response = await page.goto(websiteUrl, { waitUntil: 'networkidle2' });
     const pdfId = plugins.smartunique.shortId();
     const { documentHeight, documentWidth } = await page.evaluate(() => {
@@ -125,7 +125,7 @@ export class SmartPdf {
 
   async getFullWebsiteAsSinglePdf(websiteUrl: string) {
     const page = await this.headlessBrowser.newPage();
-    page.emulateMedia('screen');
+    page.emulateMediaType('screen');
     const response = await page.goto(websiteUrl, { waitUntil: 'networkidle2' });
     const pdfId = plugins.smartunique.shortId();
     const { documentHeight, documentWidth } = await page.evaluate(() => {
