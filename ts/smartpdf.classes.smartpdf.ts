@@ -39,7 +39,7 @@ export class SmartPdf {
     });
     this.htmlServerInstance = plugins.http.createServer(app);
     const smartnetworkInstance = new plugins.smartnetwork.SmartNetwork();
-    const portAvailable = smartnetworkInstance.isLocalPortAvailable(3210);
+    const portAvailable = smartnetworkInstance.isLocalPortUnused(3210);
     this.htmlServerInstance.listen(3210, 'localhost');
     this.htmlServerInstance.on('listening', () => {
       this._readyDeferred.resolve();

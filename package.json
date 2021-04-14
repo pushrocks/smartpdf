@@ -16,13 +16,13 @@
     "@gitzone/tsrun": "^1.2.12",
     "@gitzone/tstest": "^1.0.52",
     "@pushrocks/tapbundle": "^3.2.14",
-    "@types/node": "^14.14.31",
+    "@types/node": "^14.14.37",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0"
   },
   "dependencies": {
-    "@pushrocks/smartfile": "^8.0.8",
-    "@pushrocks/smartnetwork": "^1.1.22",
+    "@pushrocks/smartfile": "^8.0.9",
+    "@pushrocks/smartnetwork": "^2.0.4",
     "@pushrocks/smartpromise": "^3.1.3",
     "@pushrocks/smartpuppeteer": "^1.0.21",
     "@pushrocks/smartunique": "^3.0.3",
