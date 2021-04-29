@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@pushrocks/smartfile": "^8.0.10",
-    "@pushrocks/smartnetwork": "^2.0.9",
+    "@pushrocks/smartnetwork": "^2.0.10",
     "@pushrocks/smartpromise": "^3.1.5",
     "@pushrocks/smartpuppeteer": "^1.0.21",
     "@pushrocks/smartunique": "^3.0.3",
